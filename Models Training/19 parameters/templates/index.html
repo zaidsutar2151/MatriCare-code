@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maternal Health Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Maternal Health Prediction</h1>
+
+    <!-- Preset Sample Buttons -->
+    <div class="preset-buttons">
+        <button type="button" onclick="loadPreset('stable')" class="preset-btn">Sample 1</button>
+        <button type="button" onclick="loadPreset('moderate')" class="preset-btn">Sample 2</button>
+        <button type="button" onclick="loadPreset('critical')" class="preset-btn">Sample 3</button>
+    </div>
+
+    <!-- Input Form -->
+    <form method="POST" id="predictionForm">
+        <div class="form-group"><label>Blood Pressure (Sys):</label><input type="number" step="any" name="bp_sys" required></div>
+        <div class="form-group"><label>Blood Pressure (Dia):</label><input type="number" step="any" name="bp_dia" required></div>
+        <div class="form-group"><label>Pulse (HR):</label><input type="number" step="any" name="pulse" required></div>
+        <div class="form-group"><label>Temperature:</label><input type="number" step="any" name="temperature" required></div>
+        <div class="form-group"><label>Cervical Dilation (cm):</label><input type="number" step="any" name="cervical_dilation" required></div>
+        <div class="form-group"><label>Uterine Contractions (/10min):</label><input type="number" step="any" name="contractions" required></div>
+        <div class="form-group"><label>Fetal Heart Rate (FHR):</label><input type="number" step="any" name="fhr" required></div>
+        <div class="form-group"><label>Station/Descent of Head:</label><input type="number" step="any" name="station" required></div>
+        <div class="form-group"><label>Amniotic Fluid:</label><input type="number" step="any" name="amniotic_fluid" required></div>
+        <div class="form-group"><label>SpO2:</label><input type="number" step="any" name="spo2" required></div>
+        <div class="form-group"><label>Lochia:</label><input type="number" step="any" name="lochia" required></div>
+        <div class="form-group"><label>Uterus Tone:</label><input type="number" step="any" name="uterus_tone" required></div>
+        <div class="form-group"><label>Urine Output (ml/hr):</label><input type="number" step="any" name="urine_output" required></div>
+        <div class="form-group"><label>Hydration (ml/day):</label><input type="number" step="any" name="hydration" required></div>
+        <div class="form-group"><label>Pain Level (0-10):</label><input type="number" step="any" name="pain" required></div>
+        <div class="form-group"><label>Breast Engorgement (0-10):</label><input type="number" step="any" name="engorgement" required></div>
+        <div class="form-group"><label>Fatigue Level (0-10):</label><input type="number" step="any" name="fatigue" required></div>
+        <div class="form-group"><label>Mood (0=happy,10=depressed):</label><input type="number" step="any" name="mood" required></div>
+        <div class="form-group"><label>Bowel/Urinary Issues (0-10):</label><input type="number" step="any" name="bowel" required></div>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="prediction">
+        <h2>Prediction:
+            <span class="{% if prediction == 'Stable' %}normal{% elif prediction == 'Moderate' %}moderate{% else %}complication{% endif %}">
+                {{ prediction }}
+            </span>
+        </h2>
+    </div>
+    {% endif %}
+</div>
+
+<!-- JavaScript for Auto-filling Preset Data -->
+<script>
+function loadPreset(presetId) {
+    fetch(`/get_preset/${presetId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector("[name='bp_sys']").value = data["Blood Pressure (Sys)"];
+            document.querySelector("[name='bp_dia']").value = data["Blood Pressure (Dia)"];
+            document.querySelector("[name='pulse']").value = data["Pulse (HR)"];
+            document.querySelector("[name='temperature']").value = data["Temperature"];
+            document.querySelector("[name='cervical_dilation']").value = data["Cervical Dilation (cm)"];
+            document.querySelector("[name='contractions']").value = data["Uterine Contractions (/10min)"];
+            document.querySelector("[name='fhr']").value = data["Fetal Heart Rate (FHR)"];
+            document.querySelector("[name='station']").value = data["Station/Descent of Head"];
+            document.querySelector("[name='amniotic_fluid']").value = data["Amniotic Fluid"];
+            document.querySelector("[name='spo2']").value = data["SpO2"];
+            document.querySelector("[name='lochia']").value = data["Lochia"];
+            document.querySelector("[name='uterus_tone']").value = data["Uterus Tone"];
+            document.querySelector("[name='urine_output']").value = data["Urine Output (ml/hr)"];
+            document.querySelector("[name='hydration']").value = data["Hydration (ml/day)"];
+            document.querySelector("[name='pain']").value = data["Pain Level (0-10)"];
+            document.querySelector("[name='engorgement']").value = data["Breast Engorgement (0-10)"];
+            document.querySelector("[name='fatigue']").value = data["Fatigue Level (0-10)"];
+            document.querySelector("[name='mood']").value = data["Mood (0=happy,10=depressed)"];
+            document.querySelector("[name='bowel']").value = data["Bowel/Urinary Issues (0-10)"];
+        });
+}
+</script>
+</body>
+</html>

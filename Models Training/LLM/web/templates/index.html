@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maternal Monitoring Assistant</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; margin: auto; }
+        h1 { text-align: center; color: #2c3e50; }
+        input[type=text] { width: 100%; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; background: #3498db; color: white; border: none; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 8px; background: #ecf0f1; }
+        .nurse { border-left: 5px solid #27ae60; }
+        .doctor { border-left: 5px solid #c0392b; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👩‍⚕️ Maternal Monitoring Assistant</h1>
+        <form method="POST">
+            <input type="text" name="condition" placeholder="Enter patient condition (e.g. BP 150/95)">
+            <button type="submit">Get Suggestions</button>
+        </form>
+
+        {% if nurse %}
+        <div class="result nurse">
+            <h3>Basic Action (Nurse)</h3>
+            <p>{{ nurse }}</p>
+        </div>
+        <div class="result doctor">
+            <h3>Advanced Action (Doctor)</h3>
+            <p>{{ doctor }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
