@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maternal Health Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+</head>
+<body>
+  <nav>
+    <div class="nav-left">🩺 Maternal Health</div>
+    <div class="nav-right">
+      <a href="/">Prediction</a>
+      <a href="http://127.0.0.1:8001/">📊 Live Monitoring</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Maternal Health Prediction</h1>
+    <form id="healthForm">
+      <div class="grid">
+        {% for name in feature_names %}
+        <div class="form-group">
+          <label>{{ name }}:</label>
+          <input type="number" step="any" name="{{ name }}" />
+        </div>
+        {% endfor %}
+      </div>
+
+      <textarea name="notes" placeholder="Optional notes..."></textarea>
+
+      <div class="button-row">
+        <button type="button" class="sample" data-sample="1">Sample 1</button>
+        <button type="button" class="sample" data-sample="2">Sample 2</button>
+        <button type="button" class="sample" data-sample="3">Sample 3</button>
+        <button type="submit" id="predictBtn">Predict & Analyze</button>
+      </div>
+    </form>
+
+    <div id="resultBox" class="hidden">
+      <h2>Prediction: <span id="predLabel"></span></h2>
+
+      <h3>Summary</h3>
+      <p id="summary"></p>
+
+      <h3>Future Complications</h3>
+      <p id="future"></p>
+
+      <h3>Basic Actions</h3>
+      <p id="basic"></p>
+
+      <h3>Advanced Actions</h3>
+      <p id="advanced"></p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

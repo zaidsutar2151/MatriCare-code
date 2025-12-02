@@ -1,0 +1,63 @@
+body {
+    background: #f6f9fc;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+#startBtn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#startBtn:hover {
+    background: #0056b3;
+}
+
+#predictionBox {
+    background: #e9ecef;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    min-width: 300px;
+}
+
+#predictionBox h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+canvas {
+    height: 200px !important;
+}

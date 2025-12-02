@@ -1,0 +1,124 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f7f9fc;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background: #004aad;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+nav a {
+  color: white;
+  margin-left: 12px;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 1100px;
+  background: #fff;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 { text-align: center; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+textarea {
+  width: 100%;
+  margin-top: 16px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button.sample { background: #17a2b8; }
+button:hover { opacity: 0.9; }
+
+#resultBox {
+  background: #eef6ff;
+  border-left: 5px solid #007bff;
+  margin-top: 25px;
+  padding: 1.2rem;
+  border-radius: 8px;
+}
+.hidden { display: none; }
+
+/* === Prediction Colors === */
+.pred.stable {
+  color: #28a745; /* green */
+  font-weight: bold;
+}
+
+.pred.moderate {
+  color: #ffc107; /* yellow */
+  font-weight: bold;
+}
+
+.pred.critical {
+  color: #dc3545; /* red */
+  font-weight: bold;
+}
+
+/* === Spinner Animation === */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  margin-right: 6px;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
