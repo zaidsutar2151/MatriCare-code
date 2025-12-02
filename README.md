@@ -1,124 +1,210 @@
-MatriCare AI — Intelligent Maternal Health Monitoring System
+# 🩺 MatriCare AI — Intelligent Maternal Health Monitoring System
 
-MatriCare AI is an advanced maternal healthcare support system that integrates machine learning, real-time monitoring, and LLM-based clinical reasoning to predict pregnancy-related complications and assist healthcare workers during labor and postpartum care.
+---
 
-This system bridges the gap in continuous maternal monitoring, especially in low-resource settings, by providing automated risk prediction and intelligent medical suggestions based on physiological data.
+MatriCare AI is a complete **AI-driven maternal monitoring system** designed to assist doctors and nurses in predicting pregnancy-related complications using Machine Learning (ML) and LLM-based clinical reasoning.
 
-🚀 Features
-🔹 1. Continuous Maternal Monitoring (Automated Module)
+This repository contains everything required to understand, run, and evaluate the project—including code, documentation, datasets, models, diagrams, and demonstrations.
 
-Tracks 8 real-time physiological parameters
+---
 
-Processes incoming sensor data instantly
+## 🌟 Project Overview
 
-Uses a trained Random Forest model for live prediction
+Maternal complications often go undetected due to lack of continuous monitoring, delayed diagnosis, and limited decision-support systems—especially in low-resource hospitals.
 
-Categorizes patients into:
+MatriCare AI solves this by combining:
 
-Stable
+### 🔹 1. Continuous Risk Prediction Model (8 Parameters)
+- Automatically tracks 8 vital maternal parameters using sensors/hospital devices.
+- Predicts real-time maternal state:
+  - **Stable** | **Moderate** | **Critical**
+- **Accuracy:** 91.5%
 
-Moderate
+### 🔹 2. LLM-Based Suggestion Model (19 Parameters)
+- Uses 19 detailed inputs like hydration, pain score, mood, lochia etc.
+- Provides:
+  - Future complication warnings
+  - Nurse-level Immediate Actions
+  - Doctor-level Advanced Actions
+- **Accuracy:** 95%
+- Powered by **Gemma-2:2B** via Ollama and LlamaIndex vector search.
 
-Critical
+---
 
-🔹 2. LLM-Based Clinical Decision Support (Advanced Module)
+## 📁 Repository Structure
 
-Accepts 19 maternal health parameters manually
+```text
+MatriCare/
+│
+├── Documentation/
+│   ├── Project Report
+│   ├── PPT Slides
+│   ├── Abstract & Certificates
+│   └── Letters (Guide/Completion)
+│
+├── Models Training/
+│   ├── 8-Parameter ML Model (Training + Testing)
+│   ├── 19-Parameter ML Model (Training + Testing)
+│   └── LLM Integration using LlamaIndex
+│
+├── One Module/
+│   └── Single Flask App (Combined ML + LLM)
+│
+├── Two Modules/
+│   ├── first_module/ (8-parameter Continuous ML model)
+│   └── second_module/ (19-parameter LLM Suggester)
+│
+├── wifi data sharing/
+│   ├── Sender Script
+│   └── Receiver Script
+│
+├── Maternal_8_Parameters_Explanation.docx
+├── MetricCare_19_Parameter_Explanations.docx
+└── Maternal_Monitoring_48H.xlsx
+```
 
-Matches medical rules from dataset (final data.xlsx)
+---
 
-Uses vector embeddings + LLM (via LlamaIndex) to:
+## 🚀 How to Run the Project
 
-Predict future complications
+### Prerequisites
 
-Suggest Basic Actions (Nurse-level)
+Ensure you have installed:
+- Python 3.10+
+- Flask
+- Scikit-learn
+- Pandas / NumPy
+- Ollama
+- Gemma2:2B model
+- LlamaIndex
 
-Suggest Advanced Actions (Doctor-level)
+### 🔹 Step 1 — Start the LLM Backend
 
-Provides contextual and medically aligned explanations
-
-🔹 3. Clean UI with Two Modules
-
-Module 1: Continuous Monitoring Dashboard
-
-Module 2: Manual Input + LLM Analysis
-
-Modern UI with preloader animation and color-coded predictions
-
-📊 Technologies Used
-Machine Learning
-Random Forest Classifier
-XGBoost (optional experimentation)
-Scikit-Learn preprocessing
-LLM & AI
-LlamaIndex
-HuggingFace Embeddings
-Ollama local LLM (Gemma 2B or similar)
-Semantic Vector Retrieval
-
-Backend
-Python
-Flask
-
-Frontend
-HTML
-CSS
-JavaScript
-
-🧠 How It Works
-
-1️⃣ Continuous Monitoring Module
-
-Receives live sensor data via a socket listener
-Processes 8 parameters
-Predicts maternal state using ML model
-Updates dashboard instantly
-
-2️⃣ LLM Rule-Based Suggestion Module
-
-Accepts 19 parameters
-Matches conditions with medical rules from dataset
-Embeds dataset into a vector store
-
-LLM generates:
-
-Summary
-Future Complication
-Basic Action (Nurse-level)
-Advanced Action (Doctor-level)
-
-
-🏥 Use Cases
-Labor room monitoring
-Postpartum complication prediction
-Nursing decision support
-Rural/low-resource clinical settings
-Real-time emergency alerts
-
-🔧 Installation
-
-cd MatriCare-AI
-
-2. Install dependencies
-pip install -r requirements.txt
-
-3. Run Ollama (LLM Backend)
-Make sure you have Ollama installed:
+```bash
 ollama run gemma2:2b
+```
+Keep this terminal running.
 
-4. Start Flask App
+### 🔹 Option A — Run One-Module Version (Single App)
+```bash
+cd One Module
 python app.py
+```
+This version runs both ML + LLM inside one Flask server.
 
-🧪 Testing
+### 🔹 Option B — Run Two-Module Version (Both Apps Separately)
+**First module (Continuous Risk Model)**
+```bash
+cd first_module
+python app.py
+```
+**Second module (LLM Suggestion System)**
+```bash
+cd second_module
+python app.py
+```
+Both servers must be running simultaneously.
 
-Use sample buttons provided in the UI
-Upload or stream continuous data for dashboard testing
-Try multiple parameter combinations
+---
 
-🛣️ Future Enhancements
+## 📡 WiFi Data Sharing (Optional Module)
 
-Mobile App Integration
-Larger models for deeper reasoning
-Integration with IoT medical belts
-Patient risk timeline charts
-Voice-based interaction
+To stream patient data between two devices on the same network:
+
+**Sender**
+```bash
+python sender.py
+```
+**Receiver**
+```bash
+python receiver.py
+```
+This can be used for sending vital signs from bedside device → nurse station.
+
+---
+
+## 📊 Model Performance
+
+### 8-Parameter Continuous Model
+- **Accuracy:** 0.915
+- **Classification:** Stable / Moderate / Critical
+- **Purpose:** Real-time automated risk monitoring
+
+### 19-Parameter Detailed Model
+- **Accuracy:** 0.95
+- **Purpose:** Medical suggestions + future complication prediction
+
+Training plots & confusion matrices present in Models Training folder.
+
+---
+
+## 🧠 Technologies Used
+
+| Layer           | Tech                                  |
+|-----------------|---------------------------------------|
+| Backend         | Flask (Python)                        |
+| ML Models       | Scikit-Learn                          |
+| LLM             | Gemma2:2B (via Ollama)                |
+| Knowledge Retrieval | LlamaIndex (Vector Search)         |
+| Data Transfer   | Socket-based WiFi Sharing             |
+| Frontend        | HTML, CSS, JavaScript                 |
+| Documentation   | Word, PPT, PDF                        |
+
+---
+
+## 🏥 Key Features
+
+- Real-time automated maternal monitoring
+- Dual-model AI system
+- Nurse-friendly and doctor-friendly suggestions
+- Low-cost technology suitable for rural hospitals
+- Easy deployment on any Windows/Linux system
+- Expandable rule-base + vector searchable knowledge system
+
+---
+
+## 🧪 Testing
+
+- Functional testing completed for both ML modules
+- End-to-end testing for Flask-based UIs
+- Data flow testing for WiFi data sharing
+- Manual + automated validation of LLM outputs
+
+---
+
+## 📌 Use Case Example
+
+A nurse enters maternal vitals into the system →
+Continuous ML model predicts Moderate Risk →
+Nurse enters detailed 19 parameters →
+LLM gives:
+- Possible upcoming complications
+- Immediate steps
+- Doctor-level recommendations
+
+This supports faster, accurate clinical decisions.
+
+---
+
+## 📄 Documentation
+
+Complete documentation is available inside:
+
+`/Documentation`
+
+Including:
+- Full Project Report (40+ pages)
+- PPT Presentations
+- Parameter definitions
+- Certificates & Letters
+
+---
+
+## 🤝 Contributors
+
+**Md Zaid Sutar**  
+Developer • Machine Learning Engineer • Researcher
+
+⭐ If you found this project useful, give it a star on GitHub!
+
+Your support encourages further development.
