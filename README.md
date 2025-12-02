@@ -1,5 +1,7 @@
 # 🩺 MatriCare AI — Intelligent Maternal Health Monitoring System
 
+[🔗 Project Website](https://zaidsutar2151.github.io/MatriCare/)
+
 ---
 
 MatriCare AI is a complete **AI-driven maternal monitoring system** designed to assist doctors and nurses in predicting pregnancy-related complications using Machine Learning (ML) and LLM-based clinical reasoning.
@@ -95,12 +97,12 @@ This version runs both ML + LLM inside one Flask server.
 ### 🔹 Option B — Run Two-Module Version (Both Apps Separately)
 **First module (Continuous Risk Model)**
 ```bash
-cd first_module
+cd Two modules/first_module
 python app.py
 ```
 **Second module (LLM Suggestion System)**
 ```bash
-cd second_module
+cd Two modules/second_module
 python app.py
 ```
 Both servers must be running simultaneously.
